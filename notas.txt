@@ -1,0 +1,70 @@
+web:https://doc.rust-lang.org/book/ch01-03-hello-cargo.html
+
+instalar Rust:
+- curl https://sh.rustup.rs -sSf | sh
+# rustc --version
+
+cargo: es una herramienta de compilacion para paquetes y proyectos Rust
+# cargo --version
+# cargo run // compila y ejecuta el programa usando cargo 
+# cargo check // asegurarse de que compila pero no produce un ejecutable
+
+
+# Para generar una aplicación binaria, invoque el compilador Rust pasándole el nombre del archivo fuente:rustc hello.rs  
+## ./hello
+
+# En Rust, los paquetes de código se denominan cajas 
+
+GUI: Rust no tiene marco propio para GUI 
+# usar biblioteca rust-gtk
+# cargo new --bin ejemplo // Esto nos crea un directorio ejemplo con los ficheros básico
+# agregar a cargo.toml //Cargo.toml, que es el fichero de configuración
+# tener instalado cmake
+# sudo dnf install gtk3-devel glib2-devel gtksourceview3-devel webkitgtk4-devel
+########################################################################################################
+
+[build-dependencies]
+cmake = "0.1.48"
+[dependencies]
+gtk = { git = "https://github.com/gtk-rs/gtk3-rs.git" }
+cmake = "0.1.48"
+
+########################################################################################################
+
+
+# extension de Rust: script.rs
+# ejemplo de estructura:https://github.com/Rusty-Full-Stack/caja-supermercado
+# https://rustyfullstack.com/blog/organizar-codigo-en-rust-modulos
+
+usar modulo:
+
+- crearlo en lib.rs // pub mod nombre_modulo
+- use proyecto::modulo; // en main.rs
+- crear un archivo.rs
+- pub mod nombre_archivo; // en lib.rs
+- use proyecto::modulo::def //main.rs
+
+###############################################################################
+
+use modulo; // -> importación relativa al módulo actual
+use ::modulo; // -> importación absoluta, llevaría a src/archivo.rs
+use self::modulo; // -> relativo al módulo actual      
+use super::modulo; // -> con super se puede acceder al módulo padre
+##############################################################################
+
+
+Contruir: Cuando su proyecto finalmente esté listo para su lanzamiento, 
+puede usar cargo build --release para compilarlo con optimizaciones. 
+Este comando creará un ejecutable en target/release en lugar 
+de target/debug
+
+conceptos utiles: 
+- let: crea una variable
+- En Rust, las variables son inmutables por defecto
+- // sintaxis inicia un comentario
+- los :: para llamar a funciones o metodos
+- use std::io; entrada salida de datos de usuario 
+- los & indican que este argumento es una referencia
+- cargo.toml contiene las dependencias que usara el programa // las descarga y se incluiran en tarjet 
+- cargo update // Actualización de una caja para obtener una nueva versión 
+- Las funciones pueden devolver valores, debemos declarar su tipo después de una flecha ( ->)
