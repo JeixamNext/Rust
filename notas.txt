@@ -65,6 +65,95 @@ conceptos utiles:
 - los :: para llamar a funciones o metodos
 - use std::io; entrada salida de datos de usuario 
 - los & indican que este argumento es una referencia
-- cargo.toml contiene las dependencias que usara el programa // las descarga y se incluiran en tarjet 
-- cargo update // Actualización de una caja para obtener una nueva versión 
+- Cargo.toml contiene las dependencias que usara el programa // las descarga y se incluiran en tarjet 
+- Cargo update // Actualización de una caja para obtener una nueva versión 
 - Las funciones pueden devolver valores, debemos declarar su tipo después de una flecha ( ->)
+- En Rust la memoria se gestiona a través de un sistema de propiedad con un conjunto de reglas 
+que el compilador verifica. Si cualquiera de las reglas se viola, el programa no compilará. 
+Ninguna de las características de propiedad ralentizará su programa mientras se está ejecutando.
+- Las estructuras son similares a las tuplas. A diferencia de las tuplas, en una estructura nombrará 
+cada dato para que quede claro lo que significan los valores. Para definir una estructura, ingresamos la palabra clave struct
+- match permite comparar un valor con una serie de patrones y luego ejecutar código basado en qué patrón coincide.(como un swich)
+- Una caja es la cantidad más pequeña de código que el compilador de Rust considera. Las Cajas puede 
+contener módulos, y los módulos pueden estar definidos en otros archivos que obtienen compilado con la caja
+- Una caja puede venir en una de dos formas: una caja binaria o una caja de biblioteca. 
+- Un paquete es un conjunto de una o más cajas
+- Rust agrupa los errores en dos categorías principales: recuperables e irrecuperables 
+#######################################################################################################################################################################################################################
+
+Cajas Binarias: 
+Las cajas binarias son programas que puede compilar en un ejecutable 
+que puede ejecutar, como un programa de línea de comandos o un servidor. 
+Cada uno debe tener una función llamada main que define lo que sucede cuando 
+se ejecuta el ejecutable. 
+
+Caja biblioteca: 
+Las cajas de la biblioteca no tienen main y no se compilan en un 
+ejecutable. En su lugar, definen la funcionalidad destinada a 
+ser compartida con múltiples proyectos. 
+
+Paquete:
+Un paquete es un conjunto de una o más cajas que proporciona un 
+conjunto de funcionalidad. Un paquete contiene un archivo Cargo.toml 
+que describe cómo construir esas cajas.
+# Cargo es en realidad un paquete que contiene la caja binaria para la herramienta de línea de comandos
+Un paquete puede contener tantas cajas binarias como desee, pero 
+como máximo solo una cajón de la biblioteca. 
+Un paquete debe contener al menos una caja, ya sea una biblioteca o 
+caja binaria. 
+Si un paquete contiene src/main.rs y src/lib.rs, 
+tiene dos cajas: una binaria y una biblioteca, ambas con el mismo 
+nombre como el paquete. Un paquete puede tener varias cajas binarias 
+colocando archivos en el directorio src/bin : cada archivo será 
+una caja binaria separada. 
+
+# info sobre los modulos: https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html
+
+
+Errores irrecuperables con panic!
+
+Hay dos formas de causar un pánico en la práctica: 
+al tomar una acción que hace que nuestro código entre en pánico 
+(como accediendo a una matriz más allá del final) o 
+llamando explícitamente al panic! macro.
+
+################################################################################################################################################################3
+
+fn main() {
+    panic!("crash and burn");
+
+}
+
+################################################################################################################################################################3
+
+
+Errores recuperables con Result
+
+La mayoría de los errores no son lo suficientemente graves como para requerir que el programa se detenga.
+Trepresenta el tipo del valor que se devolverá en caso de éxito 
+dentro del Ok variante, y Erepresenta el tipo de error que se 
+devolverá en un caso de falla dentro del Errvariante.
+
+################################################################################################################################################################3
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+################################################################################################################################################################3
+
+# Tenga en cuenta que, al igual que el Option enum, Result enum y 
+sus variantes no necesita especificar Result:: antes de Ok y err 
+# https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html
+
+
+# rustup install nightly :es un crate que permite la integración entre Python y Rust.
+# ejecutar e interactuar con código de Python desde Rust.
+# PyO3 soporta Python 3.5 en adelante
+# https://dev.to/mattdark/integrar-rust-a-tus-proyectos-python-5ckj
+
+Publicar una caja en Crates.io:
+
+puedes compartir tu código con otras personas publicando 
+sus propios paquetes.
+

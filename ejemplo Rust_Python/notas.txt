@@ -1,0 +1,3 @@
+rustup install nightly # instalar
+
+rustup override set nightly # Asignar Nightly al proyecto creado
